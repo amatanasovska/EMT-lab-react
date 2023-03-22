@@ -2,9 +2,9 @@ import axios from "axios"
 
 const instance = axios.create({
     baseURL: 'http://localhost:9091/api',
-    headers:{
-        'Acess-Control-Allow-Origin' : '*'
-    }
+    // headers:{
+    //     'Acess-Control-Allow-Origin' : '*'
+    // }
 })
 
 export default instance;
