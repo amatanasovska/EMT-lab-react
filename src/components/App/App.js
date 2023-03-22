@@ -7,26 +7,33 @@ import {BrowserRouter as Router, Redirect, Route} from 'react-router-dom'
 import libraryRepository from "../../repository/libraryRepository";
 import LibraryService from "../../repository/libraryRepository";
 import Categories from "../Categories/categories";
-
+import Header from "../Header/header"
+import BookAdd from "../Books/BookAdd/bookadd";
 class App extends Component{
   constructor(props){
     super(props);
     this.state = {
       books:[],
-        categories:[]
+        categories:[],
+        authors:[]
     }
   }
 
   render(){
     return (
         <Router>
-          {/*<Header/>*/}
+          <Header/>
           <main>
             <div className={"container"}>
               <Route path={"/books"} exact render={() =>
-                  <Books books={this.state.books}/>}/>
+                  <Books books={this.state.books}
+                  onDelete={this.deleteBook}/>}/>
+                <Route path={"/"} exact render={() =>
+                    <Books books={this.state.books}/>}/>
                 <Route path={"/categories"} exact render={() =>
                     <Categories categories={this.state.categories}/>}/>
+                <Route path={"/books/add"} exact render={() =>
+                <BookAdd authors = {this.state.authors} categories ={this.state.categories} onAddBook = {this.addBook}/>}/>
             </div>
           </main>
         </Router>
@@ -44,6 +51,17 @@ class App extends Component{
     )
 
   }
+    loadAuthors = () =>
+    {
+        LibraryService.fetchAuthors().then(
+            (data) =>{
+                this.setState({
+                    authors: data.data
+                })
+            }
+        )
+
+    }
   loadCategories = () =>
   {
       LibraryService.fetchCategories().then(
@@ -57,9 +75,26 @@ class App extends Component{
           }
       )
   }
+  deleteBook = (id) =>
+  {
+      LibraryService.deleteBook(id).then(
+          () => {
+              this.loadBooks();
+          }
+      )
+  }
+  addBook = (name, categoryName, authorId, availableCopies) =>
+  {
+      LibraryService.addBook(name, categoryName, authorId, availableCopies).then(
+          () => {
+              this.loadBooks();
+          }
+      )
+  }
   componentDidMount() {
     this.loadBooks();
     this.loadCategories();
+    this.loadAuthors();
   }
 }
 

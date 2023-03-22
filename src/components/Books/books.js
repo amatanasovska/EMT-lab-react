@@ -22,7 +22,14 @@ const books = (props) => {
                                   <tr>
                                         <td>{item.name}</td>
                                         <td>{item.availableCopies}</td>
+                                        <td>
+                                            <a title={"Delete"} className={"btn btn-danger"} onClick={() => props.onDelete(item.id)}>
+                                                Delete
+                                            </a>
+                                        </td>
+
                                   </tr>
+
                               )
                           }
                       )}
