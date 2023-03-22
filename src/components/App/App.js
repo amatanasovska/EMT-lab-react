@@ -4,7 +4,6 @@ import  React, {Component} from "react";
 import Books from "../Books/BooksList/books";
 import {BrowserRouter as Router, Redirect, Route} from 'react-router-dom'
 
-import libraryRepository from "../../repository/libraryRepository";
 import LibraryService from "../../repository/libraryRepository";
 import Categories from "../Categories/categories";
 import Header from "../Header/header"
