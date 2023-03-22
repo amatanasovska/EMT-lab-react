@@ -50,6 +50,14 @@ const LibraryService = {
                 "isTaken" : isTaken,
                 "bookType" : bookType
             })
+    },
+    returnBook : (id, booktype_id) =>
+    {
+        return axios.put(`book/return/${booktype_id}/${id}`)
+    },
+    deleteBookCopy : (id, booktype_id) =>
+    {
+        return axios.delete(`/book/copy/${booktype_id}/${id}`)
     }
 }
 

@@ -56,6 +56,8 @@ class App extends Component{
                         copies = {this.state.selectedCopies}
                         onTake = {this.takeBook}
                         onAddCopy = {this.getBook}
+                        onReturn = {this.returnBook}
+                        onDelete = {this.deleteBookCopy}
                         booktype={this.state.selectedBook}
                     />}/>
                 <Route path={"/books/add/copy"} exact render={() =>
@@ -136,6 +138,14 @@ class App extends Component{
             }
         )
     }
+    returnBook = (id, booktype_id) =>
+    {
+        LibraryService.returnBook(id, booktype_id).then(
+            () => {
+                this.getCopies(booktype_id);
+            }
+        )
+    }
     editBook = (id, name, categoryName, authorId, availableCopies) =>
     {
         LibraryService.editBook(id, name, categoryName, authorId, availableCopies).then(
@@ -152,6 +162,14 @@ class App extends Component{
           }
       )
   }
+    deleteBookCopy = (id, booktype_id) =>
+    {
+        LibraryService.deleteBookCopy(id, booktype_id).then(
+            () => {
+                this.getCopies(booktype_id);
+            }
+        )
+    }
     addCopy = (isTaken, bookType) =>
     {
         LibraryService.addCopy(isTaken, bookType).then(

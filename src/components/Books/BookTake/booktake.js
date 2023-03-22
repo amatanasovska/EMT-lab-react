@@ -27,12 +27,24 @@ const BookTake = (props) => {
                                     <tr>
                                     <td>{item.bookId}</td>
                                     <td>{item.taken? "yes" : "no"}</td>
-                                    <td><button className={"btn btn-success ml-2"}
+                                    <td><button className={"btn btn-info ml-2"}
                                            onClick={() => props.onTake(item.bookId, item.bookType.id)}
 
                                                 disabled={item.taken}>
                                         Mark as Taken
                                     </button>
+                                        <button className={"btn btn-success ml-2"}
+                                                onClick={() => props.onReturn(item.bookId, item.bookType.id)}
+
+                                                disabled={!item.taken}>
+                                            Return Book
+                                        </button>
+                                        <button className={"btn btn-danger ml-2"}
+                                                onClick={() => props.onDelete(item.bookId, item.bookType.id)}
+
+                                        >
+                                            Delete Copy
+                                        </button>
                                     </td>
                                     </tr>
                                 )
