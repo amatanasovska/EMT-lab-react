@@ -36,7 +36,11 @@ class App extends Component{
                       this.getBook(id);
                   }}/>}/>
                 <Route path={"/"} exact render={() =>
-                    <Books books={this.state.books}/>}/>
+                    <Books books={this.state.books}
+                           onDelete={this.deleteBook} onEdit={this.getBook} onTake={(id) => {
+                        this.getCopies(id);
+                        this.getBook(id);
+                    }}/>}/>
                 <Route path={"/categories"} exact render={() =>
                     <Categories categories={this.state.categories}/>}/>
                 <Route path={"/books/add"} exact render={() =>
